@@ -1,7 +1,7 @@
 image:
-- Visual Studio 2019
-- macOS
-- Ubuntu
+  - Visual Studio 2019
+  - macOS
+  - Ubuntu
 
 skip_branch_with_pr: true
 stack: python 3.10
@@ -11,10 +11,10 @@ environment:
     secure: Ti46nPnZgFh0nRteU6ma0EhJnCTW7PaMn9hnnewZl4gBFPyRQnXNCwGog02+MRLX
 
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 
 build_script:
-- pyinstaller main.py --name counter --noconsole --noconfirm --onefile --icon icon.png
+  - pyinstaller main.py --name counter --noconsole --noconfirm --onefile --icon ./icon.png
 
 test: off
 
@@ -29,42 +29,39 @@ deploy:
 #   Windows package
 # 
 for:
--
-  matrix:
-    only:
-    - image: Visual Studio 2019
+  - matrix:
+      only:
+        - image: Visual Studio 2019
 
-  after_build:
-  - 7z a counter-windows.zip %CD%\dist\*.exe
+    after_build:
+      - 7z a counter-windows.zip %CD%\dist\*.exe
 
-  artifacts:
-  - path: counter-windows.zip
+    artifacts:
+      - path: counter-windows.zip
 
-#
-#   macOS package
-# 
--
-  matrix:
-    only:
-    - image: macOS
+  #
+  #   macOS package
+  #
+  - matrix:
+      only:
+        - image: macOS
 
-  after_build:
-  - tar -czvf counter-macos.tar.gz -C dist counter.app
+    after_build:
+      - tar -czvf counter-macos.tar.gz -C dist counter.app
 
-  artifacts:
-  - path: counter-macos.tar.gz
+    artifacts:
+      - path: counter-macos.tar.gz
 
-#
-#   Linux package
-# 
--
-  matrix:
-    only:
-    - image: Ubuntu
+  #
+  #   Linux package
+  #
+  - matrix:
+      only:
+        - image: Ubuntu
 
-  after_build:
-  - tar -czvf counter-linux.tar.gz -C dist counter
+    after_build:
+      - tar -czvf counter-linux.tar.gz -C dist counter
 
-  artifacts:
-  - path: counter-linux.tar.gz
+    artifacts:
+      - path: counter-linux.tar.gz
 
