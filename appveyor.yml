@@ -8,7 +8,7 @@ stack: python 3.10
 
 environment:
   GITHUB_TOKEN:
-    secure: Ti46nPnZgFh0nRteU6ma0EhJnCTW7PaMn9hnnewZl4gBFPyRQnXNCwGog02+MRLX
+    secure: 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
 
 install:
   - pip install -r requirements.txt
@@ -34,10 +34,10 @@ for:
         - image: Visual Studio 2019
 
     after_build:
-      - 7z a counter-windows.zip %CD%\dist\*.exe
+      - 7z a loveworldlyricapp.zip %CD%\dist\*.exe
 
     artifacts:
-      - path: counter-windows.zip
+      - path: loveworldlyricapp.zip
 
   #
   #   macOS package
@@ -47,10 +47,10 @@ for:
         - image: macOS
 
     after_build:
-      - tar -czvf counter-macos.tar.gz -C dist counter.app
+      - tar -czvf loveworldlyricapp.tar.gz -C dist counter.app
 
     artifacts:
-      - path: counter-macos.tar.gz
+      - path: loveworldlyricapp.tar.gz
 
   #
   #   Linux package
@@ -60,8 +60,8 @@ for:
         - image: Ubuntu
 
     after_build:
-      - tar -czvf counter-linux.tar.gz -C dist counter
+      - tar -czvf loveworldlyricapp.tar.gz -C dist counter
 
     artifacts:
-      - path: counter-linux.tar.gz
+      - path: loveworldlyricapp.tar.gz
 
